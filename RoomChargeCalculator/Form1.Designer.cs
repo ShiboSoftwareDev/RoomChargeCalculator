@@ -62,6 +62,7 @@
             btnClear = new Button();
             btnExit = new Button();
             tmrCurrentTiime = new System.Windows.Forms.Timer(components);
+            txtError = new Label();
             grpRoomInformation.SuspendLayout();
             grpAdditionalCharges.SuspendLayout();
             s.SuspendLayout();
@@ -232,9 +233,9 @@
             s.Controls.Add(lblSubtotal);
             s.Controls.Add(lblAdditionalCharges);
             s.Controls.Add(lblRoomCharges);
-            s.Location = new Point(37, 277);
+            s.Location = new Point(37, 308);
             s.Name = "s";
-            s.Size = new Size(549, 181);
+            s.Size = new Size(549, 150);
             s.TabIndex = 7;
             s.TabStop = false;
             s.Text = "Total Charges";
@@ -365,11 +366,21 @@
             tmrCurrentTiime.Interval = 1000;
             tmrCurrentTiime.Tick += timer1_Tick;
             // 
+            // txtError
+            // 
+            txtError.AutoSize = true;
+            txtError.ForeColor = Color.IndianRed;
+            txtError.Location = new Point(223, 281);
+            txtError.Name = "txtError";
+            txtError.Size = new Size(0, 15);
+            txtError.TabIndex = 11;
+            // 
             // frmRoomChargeCalculator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(645, 522);
+            Controls.Add(txtError);
             Controls.Add(btnExit);
             Controls.Add(btnClear);
             Controls.Add(btnCalculateCharges);
@@ -429,5 +440,6 @@
         private Label lblAdditionalCharges;
         private Label lblRoomCharges;
         private System.Windows.Forms.Timer tmrCurrentTiime;
+        private Label txtError;
     }
 }

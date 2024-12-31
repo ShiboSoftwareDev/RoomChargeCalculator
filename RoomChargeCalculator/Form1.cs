@@ -1,3 +1,5 @@
+using System.Xml;
+
 namespace RoomChargeCalculator
 {
     public partial class frmRoomChargeCalculator : Form
@@ -34,6 +36,7 @@ namespace RoomChargeCalculator
 
         private void btnCalculateCharges_Click(object sender, EventArgs e)
         {
+            bool valid = false;
             try
             {
                 double nights = double.Parse(txtNights.Text);
@@ -42,13 +45,14 @@ namespace RoomChargeCalculator
                 txtRoomCharges.Text = doubleToDollar(roomCharges);
                 this.roomCharge = roomCharges;
                 txtRoomCharges.BackColor = Color.LightGreen;
-
+                valid = true;
             }
             catch (Exception ex)
             {
                 txtRoomCharges.Text = doubleToDollar(0);
                 txtRoomCharges.BackColor = Color.IndianRed;
                 this.roomCharge = 0;
+                txtError.Text = "Please Fill in the room information correctly" + '\n';
             }
             finally
             {
@@ -64,10 +68,13 @@ namespace RoomChargeCalculator
             }
             catch (Exception ex)
             {
-                txtAdditionalCharges.Text = doubleToDollar(0);
-                txtAdditionalCharges.BackColor = Color.IndianRed;
+                //txtAdditionalCharges.Text = doubleToDollar(0);
+                //txtAdditionalCharges.BackColor = Color.IndianRed;
                 this.additionalCharge = 0;
+                //txtError.Text = "Please fill in additional charges currectly" + '\n';
             }
+            if (valid)
+                txtError.Text = "";
             this.subTotal = this.roomCharge + this.additionalCharge;
             txtSubtotal.Text = doubleToDollar(this.subTotal);
             this.tax = this.subTotal * this.taxPercent;
@@ -98,7 +105,7 @@ namespace RoomChargeCalculator
             resetDollars(txtTotalCharges);
 
             txtRoomCharges.BackColor = this.oldColor;
-            txtAdditionalCharges.BackColor = this.oldColor;
+            //txtAdditionalCharges.BackColor = this.oldColor;
 
             this.roomCharge = 0;
             this.additionalCharge = 0;
