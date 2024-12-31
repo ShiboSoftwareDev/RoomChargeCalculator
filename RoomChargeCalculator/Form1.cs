@@ -105,7 +105,7 @@ namespace RoomChargeCalculator
             resetDollars(txtTotalCharges);
 
             txtRoomCharges.BackColor = this.oldColor;
-            //txtAdditionalCharges.BackColor = this.oldColor;
+            txtAdditionalCharges.BackColor = this.oldColor;
 
             this.roomCharge = 0;
             this.additionalCharge = 0;

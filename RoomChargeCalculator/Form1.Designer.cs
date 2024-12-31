@@ -235,7 +235,7 @@
             s.Controls.Add(lblRoomCharges);
             s.Location = new Point(37, 308);
             s.Name = "s";
-            s.Size = new Size(549, 150);
+            s.Size = new Size(549, 184);
             s.TabIndex = 7;
             s.TabStop = false;
             s.Text = "Total Charges";
@@ -247,6 +247,7 @@
             txtTotalCharges.ReadOnly = true;
             txtTotalCharges.Size = new Size(100, 23);
             txtTotalCharges.TabIndex = 9;
+            txtTotalCharges.TabStop = false;
             txtTotalCharges.Text = "$0.00";
             // 
             // txtTax
@@ -255,7 +256,8 @@
             txtTax.Name = "txtTax";
             txtTax.ReadOnly = true;
             txtTax.Size = new Size(100, 23);
-            txtTax.TabIndex = 8;
+            txtTax.TabIndex = 1;
+            txtTax.TabStop = false;
             txtTax.Text = "$0.00";
             // 
             // txtSubtotal
@@ -264,7 +266,8 @@
             txtSubtotal.Name = "txtSubtotal";
             txtSubtotal.ReadOnly = true;
             txtSubtotal.Size = new Size(100, 23);
-            txtSubtotal.TabIndex = 7;
+            txtSubtotal.TabIndex = 5;
+            txtSubtotal.TabStop = false;
             txtSubtotal.Text = "$0.00";
             // 
             // txtAdditionalCharges
@@ -273,7 +276,8 @@
             txtAdditionalCharges.Name = "txtAdditionalCharges";
             txtAdditionalCharges.ReadOnly = true;
             txtAdditionalCharges.Size = new Size(100, 23);
-            txtAdditionalCharges.TabIndex = 6;
+            txtAdditionalCharges.TabIndex = 4;
+            txtAdditionalCharges.TabStop = false;
             txtAdditionalCharges.Text = "$0.00";
             // 
             // txtRoomCharges
@@ -282,7 +286,8 @@
             txtRoomCharges.Name = "txtRoomCharges";
             txtRoomCharges.ReadOnly = true;
             txtRoomCharges.Size = new Size(100, 23);
-            txtRoomCharges.TabIndex = 5;
+            txtRoomCharges.TabIndex = 3;
+            txtRoomCharges.TabStop = false;
             txtRoomCharges.Text = "$0.00";
             // 
             // lblTotalCharges
@@ -332,9 +337,9 @@
             // 
             // btnCalculateCharges
             // 
-            btnCalculateCharges.Location = new Point(171, 461);
+            btnCalculateCharges.Location = new Point(125, 498);
             btnCalculateCharges.Name = "btnCalculateCharges";
-            btnCalculateCharges.Size = new Size(75, 49);
+            btnCalculateCharges.Size = new Size(120, 23);
             btnCalculateCharges.TabIndex = 8;
             btnCalculateCharges.Text = "Calculate Charges";
             btnCalculateCharges.UseVisualStyleBackColor = true;
@@ -342,7 +347,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(279, 474);
+            btnClear.Location = new Point(279, 498);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(75, 23);
             btnClear.TabIndex = 9;
@@ -352,7 +357,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(389, 474);
+            btnExit.Location = new Point(389, 498);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 10;
@@ -379,7 +384,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(645, 522);
+            BackColor = Color.WhiteSmoke;
+            ClientSize = new Size(645, 543);
             Controls.Add(txtError);
             Controls.Add(btnExit);
             Controls.Add(btnClear);
