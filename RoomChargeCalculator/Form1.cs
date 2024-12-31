@@ -1,150 +1,122 @@
 namespace RoomChargeCalculator
 {
-    public partial class Form1 : Form
+    public partial class frmRoomChargeCalculator : Form
     {
-        public Form1()
+        private double taxPercent = 0.1;
+        private string doubleToDollar(double Input){
+            return "$" + Input.ToString("0.00");
+        }
+        private double additionalCharge = 0;
+        private double roomCharge = 0;
+        private double tax = 0;
+        private double subTotal = 0;
+        private double total = 0;
+        private Color oldColor;
+        public frmRoomChargeCalculator()
         {
             InitializeComponent();
+            lblTimeContent.Text = DateTime.Now.ToLongTimeString();
+            lblDateContent.Text = DateTime.Now.DayOfWeek + ", " + DateTime.Now.ToLongDateString();
+            oldColor = txtRoomCharges.BackColor;
+            this.KeyPreview = true; 
+            this.KeyDown += new KeyEventHandler(frmRoomChargeCalculator_keyDown);
         }
+   
 
-        private void txtNights_TextChanged(object sender, EventArgs e)
+        private void frmRoomChargeCalculator_keyDown(object sender, KeyEventArgs e)
         {
-
-        }
-
-        private void lblTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTime_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDateContent_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTimeContent_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNights_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNightlyCharge_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtNightlyCharge_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblRoomService_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPhone_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMisc_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtRoomService_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPhone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMisc_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblRoomCharges_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblAdditionalCharges_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSubtotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTax_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTotalCharges_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtRoomCharges_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAdditionalCharges_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSubtotal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTax_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTotalCharges_TextChanged(object sender, EventArgs e)
-        {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnCalculateCharges.PerformClick();
+                e.Handled = true; 
+            }
         }
 
         private void btnCalculateCharges_Click(object sender, EventArgs e)
         {
+            try
+            {
+                double nights = double.Parse(txtNights.Text);
+                double nightlyCharge = double.Parse(txtNightlyCharge.Text);
+                double roomCharges = nights * nightlyCharge;
+                txtRoomCharges.Text = doubleToDollar(roomCharges);
+                this.roomCharge = roomCharges;
+                txtRoomCharges.BackColor = Color.LightGreen;
+
+            }
+            catch (Exception ex)
+            {
+                txtRoomCharges.Text = doubleToDollar(0);
+                txtRoomCharges.BackColor = Color.IndianRed;
+                this.roomCharge = 0;
+            }
+            finally
+            {
+            }
+            try
+            {
+                double phone = double.Parse(txtPhone.Text);
+                double misc = double.Parse(txtMisc.Text);
+                double roomServie = double.Parse(txtRoomService.Text);
+                txtAdditionalCharges.Text = doubleToDollar(phone + misc + roomServie);
+                txtAdditionalCharges.BackColor = Color.LightGreen;
+                this.additionalCharge = phone + misc + roomServie;
+            }
+            catch (Exception ex)
+            {
+                txtAdditionalCharges.Text = doubleToDollar(0);
+                txtAdditionalCharges.BackColor = Color.IndianRed;
+                this.additionalCharge = 0;
+            }
+            this.subTotal = this.roomCharge + this.additionalCharge;
+            txtSubtotal.Text = doubleToDollar(this.subTotal);
+            this.tax = this.subTotal * this.taxPercent;
+            txtTax.Text = doubleToDollar(this.tax);
+            this.total = this.subTotal + this.tax;
+            txtTotalCharges.Text = doubleToDollar(total);
+
+        }
+
+        private void resetDollars(Control control)
+        {
+            control.Text = doubleToDollar(0);
 
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            txtNights.Text = "";
+            txtNightlyCharge.Text = "";
+            txtPhone.Text = "";
+            txtMisc.Text = "";
+            txtRoomService.Text = "";
 
+            resetDollars(txtRoomCharges);
+            resetDollars(txtAdditionalCharges);
+            resetDollars(txtSubtotal);
+            resetDollars(txtTax);
+            resetDollars(txtTotalCharges);
+
+            txtRoomCharges.BackColor = this.oldColor;
+            txtAdditionalCharges.BackColor = this.oldColor;
+
+            this.roomCharge = 0;
+            this.additionalCharge = 0;
+            this.subTotal = 0;
+            this.tax = 0;
+            this.total = 0;
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblTimeContent.Text = DateTime.Now.ToLongTimeString();
+            lblDateContent.Text = DateTime.Now.DayOfWeek + ", " + DateTime.Now.ToLongDateString();
         }
     }
 }
