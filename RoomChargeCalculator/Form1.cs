@@ -34,6 +34,15 @@ namespace RoomChargeCalculator
             }
         }
 
+        private double SafeParse(string input)
+        {
+            if (double.TryParse(input, out double result))
+            {
+                return result;
+            }
+            return 0;
+        }
+
         private void btnCalculateCharges_Click(object sender, EventArgs e)
         {
             bool valid = false;
@@ -66,11 +75,17 @@ namespace RoomChargeCalculator
                 txtAdditionalCharges.BackColor = Color.LightGreen;
                 this.additionalCharge = phone + misc + roomServie;
             }
+            
             catch (Exception ex)
             {
                 //txtAdditionalCharges.Text = doubleToDollar(0);
                 //txtAdditionalCharges.BackColor = Color.IndianRed;
-                this.additionalCharge = 0;
+                double phone = SafeParse(txtPhone.Text);
+                double misc = SafeParse(txtMisc.Text);
+                double roomService = SafeParse(txtRoomService.Text);
+
+                this.additionalCharge = phone + misc + roomService;
+                txtAdditionalCharges.Text = doubleToDollar(this.additionalCharge);
                 //txtError.Text = "Please fill in additional charges currectly" + '\n';
             }
             if (valid)
@@ -112,6 +127,8 @@ namespace RoomChargeCalculator
             this.subTotal = 0;
             this.tax = 0;
             this.total = 0;
+
+            txtNights.Focus();
         }
 
 

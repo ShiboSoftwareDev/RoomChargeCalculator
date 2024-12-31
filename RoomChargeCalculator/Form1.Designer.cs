@@ -71,9 +71,10 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(298, 24);
+            lblTitle.Font = new Font("Segoe UI", 15F);
+            lblTitle.Location = new Point(279, 9);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(70, 15);
+            lblTitle.Size = new Size(114, 28);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Peace Hotel";
             // 
